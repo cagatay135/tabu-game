@@ -1,3 +1,234 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
+
+<div className="container">
+      <div className="row">
+        <div className="col-md-12">
+          <br/>
+          <h1 className="text-white">Team 1</h1>
+          <input type="text" className="form-control bg-transparent" placeholder="A Takımı" />
+          <br/>
+          <h1 className="text-white">Team 2</h1>
+          <input type="text" className="form-control bg-transparent" placeholder="B Takımı"/>
+        </div>
+    </div>
+    <div class="row">
+    <div class="col md-12 mt-5">
+      <div className="text-center">
+        <button className="btn btn-warning btn-lg btn-block">Start Game</button>
+      </div>	
+    </div>
+    </div>
+    </div>
+
+
+
+
+    import {useLocation} from "react-router-dom";
+import logo from './logo.svg';
+import './App.css';
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
+const db = require('./word.json');
+
+
+const style = {
+  container: {
+    display:"flex",
+    flexDirection:"row",
+    marginTop: '10%',
+  },
+  card : {
+    width:"40%",
+    justifyContent:"center",
+    },
+    title : {
+      color:"white",
+      backgroundColor:"#667994",
+      width:"100%",
+      padding: "20px",
+      textAlign:'center',
+      border: "2px solid #667994",
+      borderTopLeftRadius: "15px",
+      borderTopRightRadius: "15px",
+      fontWeight: "bold",
+    },
+    question : {  
+      color:"#484F5C",
+      backgroundColor:"#white",
+      width:"100%",
+      height:"200px",
+      padding: "20px",
+      border: "2px solid #667994",
+      borderBottomLeftRadius: "15px",
+      borderBottomRightRadius: "15px",
+      textAlign:'center',
+      fontWeight: "bold",
+      lineHeight: "20px",
+      webkitBoxShadow: "5px 5px 30px 0px #657893",
+      mozBoxShadow: "5px 5px 30px 0px #657893",
+      boxShadow: "5px 5px 30px 0px #657893",
+    },
+    cardText: {
+      color:"white",
+    },
+    score: {
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "display": "flex",
+      "margin": "1em 0",
+      "width": "50%",
+      marginLeft: "7%",
+
+
+    },
+    scorecontainer: {
+      "backgroundColor": "#A4B2C9",
+      "width": "48%",
+      marginLeft: "3%",
+    },
+    team: {
+      "paddingTop": "10px",
+      "display": "block",
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+    eachscore: {
+      "fontFamily": "'Staatliches', cursive",
+      "fontSize": "36px",
+      "padding": "10px 0px",
+      "display": "block",
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+    scorebuttons: {
+      "marginBottom": "20px",
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+    addpoint: {
+      "fontSize": "30px",
+      "color": "#657893",
+      padding:"5px",
+      border: "2px solid #667994",
+
+    },
+    subtractpoint: {
+      "marginRight": "20px",
+      "fontSize": "30px",
+      "color": "#657893",
+      padding:"5px",
+      border: "2px solid #667994",
+
+    },
+    add_point_hover: {
+      "cursor": "pointer",
+      "color": "#404654"
+    },
+    subtract_point_hover: {
+      "cursor": "pointer",
+      "color": "#404654"
+    },
+    add_point_active: {
+      "transform": "translateY(2px)"
+    },
+    subtract_point_active: {
+      "transform": "translateY(2px)"
+    },
+    passQuestion: {
+      "marginLeft": "20%",
+      fontSize: "25px",
+      fontWeight: "bold",
+    }
+
+}
+
+function Game({history}) {
+  const [teamascore, Setteamascore] = useState(0)
+  const [teambscore, Setteambscore] = useState(0)
+  const [randomquestion, Setrandomquestion] = useState(0)
+
+  const location = useLocation()
+  const { teamaname, teambname } = location.state
+
+  const [allquestion, setAllquestion] = useState([])
+  useState(() => {
+    Setrandomquestion(Math.floor(Math.random() * db.length))
+  }, [])
+  console.log(randomquestion)
+
+  const addpointa = () => {
+    Setteamascore(teamascore + 1)
+    nextQuestion()
+  }
+
+  const subtractpointa = () => {
+    Setteamascore(teamascore - 1)
+    nextQuestion()
+  }
+
+  const addpointb = () => {
+    Setteambscore(teambscore + 1)
+    nextQuestion()
+  }
+
+  const subtractpointb = () => {
+    Setteambscore(teambscore - 1)
+    nextQuestion()
+  }
+  const nextQuestion = () => {
+    Setrandomquestion(Math.floor(Math.random() * db.length))
+  }
+
+  return (
+    <div>
+    <div id="container" style={style.container}>
+      <div id="root" style={style.card}>
+        <div style={style.title}>
+          {db[randomquestion].word}
+        </div>
+        <div style={style.question}>
+        <p>{db[randomquestion].taboo[0]}</p>
+        <p>{db[randomquestion].taboo[1]}</p>
+        <p>{db[randomquestion].taboo[2]}</p>
+        <p>{db[randomquestion].taboo[3]}</p>
+        <p>{db[randomquestion].taboo[4]}</p>
+        </div>
+      </div>
+      <div style={style.score}>
+        <div style={style.scorecontainer}>
+          <span style={style.team}>{teamaname}</span>
+          <span style={style.eachscore}>{teamascore}
+          </span>
+          <div style={style.scorebuttons}>
+            <i style={style.subtractpoint} onClick={subtractpointa}>-</i>
+            <i style={style.addpoint}
+            onClick={addpointa}>+</i>
+          </div>
+        </div>
+        <div style={style.scorecontainer}>
+          <span style={style.team}>{teambname}</span>
+          <span style={style.eachscore}>
+            {teambscore}
+          </span>
+          <div style={style.scorebuttons}>
+          <i style={style.subtractpoint}
+          onClick={subtractpointb}>-</i>
+          <i style={style.addpoint}
+          onClick={addpointb}>+</i>
+          </div>
+        </div>
+      </div>
+  </div>
+   <i style={style.passQuestion} onClick={nextQuestion}>Geç</i>
+    </div>
+  );
+}
+
+export default Game;
+
+
+        <button className="btn btn-warning btn-md m-1" style={{alignSelf:"center"}} onClick={() => setIsplay(!isplay)}>
+              {isplay ? "Mola" : "Devam Et"}
+        </button>
