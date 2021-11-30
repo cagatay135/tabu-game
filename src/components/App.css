@@ -79,3 +79,35 @@ input.input-items::placeholder {
   color: #FFFFFF;
   font-weight: bold;
 }
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap; 
+}
+
+.strike > h4 {
+  position: relative;
+  display: inline-block;
+}
+
+.strike > h4:before,
+.strike > h4:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: black;
+}
+
+.strike > h4:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.strike > h4:after {
+  left: 100%;
+  margin-left: 15px;
+}

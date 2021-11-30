@@ -13,60 +13,61 @@ const db = require('./word.json');
 function MyVerticallyCenteredModal(props) {
   return (
     <Modal
+    backdrop="static"
+
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Tur {props.currenttour} Sonuçlar
-        </Modal.Title>
-      </Modal.Header>
       {props.currenttour == props.tour && props.playerteam === props.teambname ? (
-        <Modal.Body>
-        <h4>Genel Sonuçlar</h4>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">{props.teamaname}</th>
-              <th scope="col">{props.teambname}</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr>
-              <th scope="col">
-                {props.teamascore}
-              </th>
-              <th scope="col">
-                {props.teambscore}
-              </th>
-            </tr>
-
-          </tbody>
-        </table>
+        null
+      ) : (
+        <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-hcenter">
+          <b>Tur {props.currenttour} Sonuçlar</b>
+        </Modal.Title>
+        </Modal.Header>
+      )}
+      {props.currenttour == props.tour && props.playerteam === props.teambname ? (
+        <Modal.Body className="text-center">
+        <h4><b>Genel Sonuçlar</b></h4>
+        <img src="https://cdn-icons-png.flaticon.com/512/1462/1462412.png" width="100px" class="mt-3 mb-3"/>
+        <h4><b>{props.teamascore} - {props.teambscore}</b></h4>
+        <h4><b>Kazanan Takım</b></h4>
+        {props.teamascore > props.teambscore ? (
+          <h4><b>{props.teamaname}</b></h4>
+        ) : props.teamascore === props.teambscore ? 
+        (
+        <h4><b>Berabere</b></h4>
+        ) : (
+        <h4><b>{props.teambname}</b></h4>)
+        }
         </Modal.Body>
       ) : (
         <Modal.Body>
-        <h4>Team {props.playerteam} </h4>
-        <table className="table table-striped">
+<div class="strike">
+<h4 className="text-center"><b>Team {props.playerteam}</b></h4>
+
+</div>
+        <table className="table table-striped mt-3">
           <thead>
             <tr>
-              <th scope="col">Pas</th>
-              <th scope="col">Tabu</th>
-              <th scope="col">Doğru</th>
+              <th scope="col"><b>Pas</b></th>
+              <th scope="col"><b>Tabu</b></th>
+              <th scope="col"><b>Doğru</b></th>
             </tr>
           </thead>
           <tbody>
           <tr>
               <th scope="col">
-                {props.playerteam == props.teamaname ? props.tourpassteama : props.tourpassteamb}
+                <b>{props.playerteam == props.teamaname ? props.tourpassteama : props.tourpassteamb}</b>
               </th>
               <th scope="col">
-                {props.playerteam == props.teamaname ? props.tourtabooteama : props.tourtabooteamb}
+                <b>{props.playerteam == props.teamaname ? props.tourtabooteama : props.tourtabooteamb}</b>
               </th>
               <th scope="col">
-              {props.playerteam == props.teamaname ? props.tourpointteama : props.tourpointteamb}
+               <b>{props.playerteam == props.teamaname ? props.tourpointteama : props.tourpointteamb}</b>
               </th>
             </tr>
 
@@ -75,9 +76,10 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Body>
       )}
       {props.currenttour == props.tour && props.playerteam === props.teambname ? (
-        <Modal.Footer>
+
+        <Modal.Footer className="w-100">
         <Link to="/"  className="btn btn-block w-100" style={{'text-decoration':'none'}}>
-        <Button>Ana Sayfa</Button>
+        <Button className="btn btn-danger w-100" onClick={() => props.onGameOver()}><b>Ana Sayfa</b></Button>
         </Link>
         </Modal.Footer>
       ) : (
@@ -87,7 +89,7 @@ function MyVerticallyCenteredModal(props) {
           props.playerteam == props.teamaname ? props.settourpassteama(0) : props.settourpassteamb(0);
           props.playerteam == props.teamaname ? props.settourtabooteama(0) : props.settourtabooteamb(0);
           props.onHide();
-      }}>Başlat</Button>
+      }}><b>Başlat</b></Button>
       </Modal.Footer>
       )}
     </Modal>
@@ -275,7 +277,7 @@ function Game({history}) {
               isPlaying={isplay}
               key={key}
               size={100}
-              duration={timecount}
+              duration={1*timecount}
               colors={[["#E67065", 1]]}
               onComplete={() => {
                   setModalShow(true);
@@ -345,6 +347,7 @@ function Game({history}) {
               currenttour={currenttour}
               tour={tour}
               show={modalShow}
+              setIsplay={setIsplay}
               onHide={() => 
               {
                 setModalShow(false)

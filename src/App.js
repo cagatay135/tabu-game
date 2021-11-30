@@ -55,7 +55,7 @@ function App() {
         <Col xs="10" lg="11">
           <RangeSlider
                value={timecount}
-               min={30}
+               min={1}
                max={120}
                step={5}
                tooltip='off'
