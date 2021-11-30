@@ -100,6 +100,7 @@ const style = {
     display:"flex",
     flexDirection:"row",
     marginTop: '10%',
+    
   },
   card : {
     width:"40%",
@@ -221,7 +222,7 @@ function Game({history}) {
   const [tourpassteamb, settourpassteamb] = useState(0);
 
   const location = useLocation()
-  const { teamaname, teambname, tour } = location.state
+  const { teamaname, teambname, tour, timecount } = location.state
   const [playerteam, setPlayerTeam] = useState(teamaname);
   const [currenttour , setCurrenttour] = useState(1)
 
@@ -274,7 +275,7 @@ function Game({history}) {
               isPlaying={isplay}
               key={key}
               size={100}
-              duration={2}
+              duration={timecount}
               colors={[["#E67065", 1]]}
               onComplete={() => {
                   setModalShow(true);
