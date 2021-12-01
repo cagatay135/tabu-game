@@ -14,7 +14,6 @@ function MyVerticallyCenteredModal(props) {
   return (
     <Modal
     backdrop="static"
-
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -46,10 +45,10 @@ function MyVerticallyCenteredModal(props) {
         </Modal.Body>
       ) : (
         <Modal.Body>
-<div class="strike">
-<h4 className="text-center"><b>Team {props.playerteam}</b></h4>
+        <div class="strike">
+        <h4 className="text-center"><b>Team {props.playerteam}</b></h4>
 
-</div>
+        </div>
         <table className="table table-striped mt-3">
           <thead>
             <tr>
@@ -96,118 +95,6 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-
-const style = {
-  container: {
-    display:"flex",
-    flexDirection:"row",
-    marginTop: '10%',
-    
-  },
-  card : {
-    width:"40%",
-    justifyContent:"center",
-    },
-    title : {
-      color:"white",
-      backgroundColor:"#667994",
-      width:"100%",
-      padding: "20px",
-      textAlign:'center',
-      border: "2px solid #667994",
-      borderTopLeftRadius: "15px",
-      borderTopRightRadius: "15px",
-      fontWeight: "bold",
-    },
-    question : {  
-      color:"#484F5C",
-      backgroundColor:"#white",
-      width:"100%",
-      height:"200px",
-      padding: "20px",
-      border: "2px solid #667994",
-      borderBottomLeftRadius: "15px",
-      borderBottomRightRadius: "15px",
-      textAlign:'center',
-      fontWeight: "bold",
-      lineHeight: "20px",
-      webkitBoxShadow: "5px 5px 30px 0px #657893",
-      mozBoxShadow: "5px 5px 30px 0px #657893",
-      boxShadow: "5px 5px 30px 0px #657893",
-    },
-    cardText: {
-      color:"white",
-    },
-    score: {
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "display": "flex",
-      "margin": "1em 0",
-      "width": "50%",
-      marginLeft: "7%",
-
-
-    },
-    scorecontainer: {
-      "backgroundColor": "#A4B2C9",
-      "width": "48%",
-      marginLeft: "3%",
-    },
-    team: {
-      "paddingTop": "10px",
-      "display": "block",
-      fontWeight: "bold",
-      textAlign: "center",
-    },
-    eachscore: {
-      "fontFamily": "'Staatliches', cursive",
-      "fontSize": "36px",
-      "padding": "10px 0px",
-      "display": "block",
-      fontWeight: "bold",
-      textAlign: "center",
-    },
-    scorebuttons: {
-      "marginBottom": "20px",
-      fontWeight: "bold",
-      textAlign: "center",
-    },
-    addpoint: {
-      "fontSize": "30px",
-      "color": "#657893",
-      padding:"5px",
-      border: "2px solid #667994",
-
-    },
-    subtractpoint: {
-      "marginRight": "20px",
-      "fontSize": "30px",
-      "color": "#657893",
-      padding:"5px",
-      border: "2px solid #667994",
-
-    },
-    add_point_hover: {
-      "cursor": "pointer",
-      "color": "#404654"
-    },
-    subtract_point_hover: {
-      "cursor": "pointer",
-      "color": "#404654"
-    },
-    add_point_active: {
-      "transform": "translateY(2px)"
-    },
-    subtract_point_active: {
-      "transform": "translateY(2px)"
-    },
-    passQuestion: {
-      "marginLeft": "20%",
-      fontSize: "25px",
-      fontWeight: "bold",
-    }
-
-}
 
 function Game({history}) {
   const [teamascore, Setteamascore] = useState(0)
@@ -292,7 +179,7 @@ function Game({history}) {
         </br>{currenttour}/{tour}</h1>
         <div className="d-flex justify-content-center mt-4">
         <div className="row mt-2 mb-5 w-75 justify-content-center">
-          <div className="col-md-6 col-lg-6  p-0 border border-warning rounded" style={{background:"#FFFFFF",color:"#F05E56"}} id="card">
+          <div className="col-md-6 col-lg-6  p-0 border-0 rounded" style={{background:"#FFFFFF",color:"#F05E56"}} id="card">
             <div style={{background:"#E67065",color:"white"}} className="card-header">
             <h1 className="display-4 font-weight-bold text-white mb-3"><strong>{db[randomquestion].word}</strong></h1>
             </div>
@@ -312,7 +199,7 @@ function Game({history}) {
           </div>
           <div className="col-md-6 col-lg-6 mt-5 mt-auto mx-auto mb-5">
             <br></br>
-            <button className="btn btn-warning btn-lg btn-block mx-1 text-black" style={{width:"30%"}} onClick={() => { 
+            <button className="btn btn-warning btn-lg btn-block mx-1 text-white p-2" style={{width:"30%"}} onClick={() => { 
               if(playerteam === teamaname && tourpassteama < 3){
                 nextQuestion()
                 playerteam === teamaname ? settourpassteama(tourpassteama+1) : settourpassteamb(tourpassteamb+1)
@@ -348,12 +235,13 @@ function Game({history}) {
               tour={tour}
               show={modalShow}
               setIsplay={setIsplay}
-              onHide={() => 
+              onHide={async () => 
               {
-                setModalShow(false)
+                await setModalShow(false)
                 setKey(prevKey => prevKey + 1)
                 playerteam===teambname ? setCurrenttour(currenttour + 1) : setCurrenttour(currenttour)
                 setPlayerTeam(playerteam === teamaname ? teambname : teamaname)
+                
 
                 }
               }

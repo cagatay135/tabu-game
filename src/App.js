@@ -30,12 +30,12 @@ function App() {
   return (
     <div className="container h-100">
       <div className="row align-items-center h-100">
-        <div className="col-md-12 my-auto">
-         <img src={logo} alt="Logo" style={{width:"50%"}} className="text-center max-wd" class="center"/>
+        <div className="col-md-12 my-auto py-5">
+         <img src={logo} alt="Logo" style={{width:"50%"}} className="text-center" class="center"/>
          <Form noValidate validated={validated} onSubmit={handleSubmit}>
       <Row className="mb-3">
         <Form.Group as={Col} md="12" controlId="validationCustom04">
-        <h6 className="text-white text-left mt-5"><strong>Takım 1</strong></h6>
+        <h6 className="text-white text-left mt-4"><strong>Takım 1</strong></h6>
           <Form.Control className="form-control bg-transparent input-items" style={{color:"white"}} type="text" placeholder="Takım Adını Giriniz..." required onChange={e => setTeama(e.target.value)} />
           <Form.Control.Feedback type="invalid" style={{color:"white"}}>
           Geçerli bir takım ismi giriniz.
@@ -52,7 +52,7 @@ function App() {
         <h6 className="text-white text-left mt-4"><strong>Süre</strong></h6>
         <div className="form-control bg-transparent">
         <Form.Group as={Row}>
-        <Col xs="10" lg="11">
+        <Col xs="9" lg="11" sm="10">
           <RangeSlider
                value={timecount}
                min={1}
@@ -63,7 +63,7 @@ function App() {
                onChange={changeEvent => setTimeCount(changeEvent.target.value)}
           />
         </Col>
-        <Form.Label lg="1" column xs="2" style={{color:"white"}}>
+        <Form.Label lg="1" column xs="3" sm="2" style={{color:"white"}}>
           <b>{timecount} sn</b>
         </Form.Label>
       </Form.Group>
