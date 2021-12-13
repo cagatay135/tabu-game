@@ -36,20 +36,20 @@ function App() {
       <Row className="mb-3">
         <Form.Group as={Col} md="12" controlId="validationCustom04">
         <h6 className="text-white text-left mt-4"><strong>Takım 1</strong></h6>
-          <Form.Control className="form-control bg-transparent input-items" style={{color:"white"}} type="text" placeholder="Takım Adını Giriniz..." required onChange={e => setTeama(e.target.value)} />
+          <Form.Control className="form-control bg-transparent input-items" style={{color:"white"}} type="text" placeholder="Enter Team Name..." required onChange={e => setTeama(e.target.value)} />
           <Form.Control.Feedback type="invalid" style={{color:"white"}}>
-          Geçerli bir takım ismi giriniz.
+          Please provide a valid team.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="12" controlId="validationCustom05">
         <h6 className="text-white text-left mt-4"><strong>Takım 2</strong></h6>
-        <Form.Control className="form-control bg-transparent input-items" style={{color:"white"}} type="text" placeholder="Takım Adını Giriniz..." required onChange={e => setTeamb(e.target.value)} />
+        <Form.Control className="form-control bg-transparent input-items" style={{color:"white"}} type="text" placeholder="Enter Team Name..." required onChange={e => setTeamb(e.target.value)} />
           <Form.Control.Feedback type="invalid" style={{color:"white"}}> 
-            Geçerli bir takım ismi giriniz.
+            Please provide a valid team.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md="12" controlId="validationCustom05">
-        <h6 className="text-white text-left mt-4"><strong>Süre</strong></h6>
+        <h6 className="text-white text-left mt-4"><strong>Time</strong></h6>
         <div className="form-control bg-transparent">
         <Form.Group as={Row}>
         <Col xs="9" lg="11" sm="10">
@@ -64,14 +64,14 @@ function App() {
           />
         </Col>
         <Form.Label lg="1" column xs="3" sm="2" style={{color:"white"}}>
-          <b>{timecount} sn</b>
+          <b>{timecount} sec</b>
         </Form.Label>
       </Form.Group>
       </div>
 
         </Form.Group>
         <Form.Group>
-        <h6 className="text-white text-left mt-4"><strong>Tur Sayısı</strong></h6>
+        <h6 className="text-white text-left mt-4"><strong>Tour Count</strong></h6>
           <select id="deneme" default="1" onChange={e => setTourcount(e.target.value)} class="form-control" style={{background:"transparent" , color:"white"}} required id="exampleFormControlSelect1">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -87,12 +87,12 @@ function App() {
       {teama && teamb && tourcount && teama !== teamb ? (
         <Link to="/game" style={{'text-decoration':'none'}}   state={{ teamaname: teama, teambname:teamb, tour:tourcount, timecount:timecount}}>
         <Button type="submit" className="btn btn-success btn-lg btn-block">
-          OYUNA BAŞLA
+          Start Game
         </Button>
       </Link>
       ) : (
         <Button type="submit" className="btn btn-success btn-lg btn-block">
-          OYUNA BAŞLA
+          Start Game
       </Button>
       )}
       </div>
